@@ -1,0 +1,55 @@
+{
+    "name": "ytake/microcms-project",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yuuki Takezawa",
+            "email": "yuuki.takezawa@comnect.jp.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "ext-mcrypt": "*",
+        "laravel/framework": "4.2.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*",
+        "mockery/mockery": "0.*",
+        "satooshi/php-coveralls": "dev-master",
+        "barryvdh/laravel-ide-helper": "1.*",
+        "facebook/xhprof": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "microCms\\": "core"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "__microCms\\Tests\\": "core/tests"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php artisan clear-compiled",
+            "php artisan optimize"
+        ],
+        "post-update-cmd": [
+            "php artisan clear-compiled",
+            "php artisan optimize"
+        ],
+        "post-create-project-cmd": [
+            "php artisan key:generate"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "suggest": {
+        "ext-xhprof": "facebook/xhprof",
+        "lib-graphviz": "The graphviz library is used for displaying the execution path in a kind of flowchart between methods."
+    },
+    "minimum-stability": "stable"
+}

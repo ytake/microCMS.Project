@@ -1,0 +1,15 @@
+/bootstrap/compiled.php
+/vendor
+/node_modules
+/bower_components
+/public/packages
+/public/xhprof_html
+composer.phar
+composer.lock
+.env.*.php
+.env.php
+.DS_Store
+.idea
+Thumbs.db
+_ide_helper.php
+
