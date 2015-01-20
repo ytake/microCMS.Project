@@ -13,8 +13,9 @@
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
     <link rel="apple-touch-icon-precomposed" href="/icon/favicon.png">
     <link rel="shortcut icon" href="/icon/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/foundation/normalize.css">
+    <link rel="stylesheet" href="/css/foundation/foundation.css">
+    <link rel="stylesheet" href="/css/font-awesome/font-awesome.css">
     <link rel="stylesheet" href="/css/app.css">
     @yield('styles')
 </head>
@@ -24,7 +25,7 @@
     @yield('content')
 </div>
 @include('elements.footer')
-<script src="/assets/js/react.min.js"></script>
+<script src="/js/react.min.js"></script>
 <script src="/js/app.js"></script>
 @yield('scripts')
 @yield('debug.profiler', null)

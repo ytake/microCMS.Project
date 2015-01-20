@@ -122,6 +122,8 @@ return [
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
         'microCms\Structure\Providers\ApplicationServiceProvider',
+        'microCms\Structure\Providers\EventServiceProvider',
+        'microCms\Structure\Providers\RouterServiceProvider',
     ],
 
     /*
