@@ -26,7 +26,8 @@ $app = new \microCms\Structure\ApplicationCore;
 
 $env = $app->detectEnvironment([
 
-    'local' => ['homestead', '*.local'],
+    'develop' => ['*.local'],
+    'local' => ['homestead'],
 
 ]);
 

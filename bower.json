@@ -9,44 +9,15 @@
         "tests"
     ],
     "dependencies": {
-        "bootstrap": "*",
+        "jquery":"*",
+        "foundation": "*",
         "react": "0.*",
-        "fancybox": "2.*",
         "font-awesome": "*"
     },
     "exportsOverride": {
 
     },
     "overrides": {
-        "font-awesome": {
-            "main" : [
-                "**/*.min.css",
-                "**/Font*",
-                "**/*webfont*"
-            ]
-        },
-        "bootstrap": {
-            "main" : [
-                "**/*.min.css",
-                "**/glyphicons-*"
-            ]
-        },
-        "jquery": {
-            "main" : "**/*.min.js"
-        },
-        "fancybox": {
-            "main": [
-                "**/*.pack.js",
-                "**/*.css",
-                "**/*.png",
-                "**/*.gif"
-            ]
-        },
-        "react": {
-            "main" : [
-                "**/*.min.js",
-                "JSXTransformer.js"
-            ]
-        }
+
     }
 }
