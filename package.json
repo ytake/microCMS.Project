@@ -1,13 +1,23 @@
 {
     "name": "microcms-project",
-    "license" : "MIT",
-    "author": {
-        "name" : "Yuuki Takezawa",
-        "email" : "yuuki.takezawa@comnect.jp.net",
-        "url" : "http://blog.comnect.jp.net/"
+    "license": "MIT",
+    "version": "1.0.0",
+    "description": "microCMS.Project",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
+    "author": {
+        "name": "Yuuki Takezawa",
+        "email": "yuuki.takezawa@comnect.jp.net",
+        "url": "http://blog.comnect.jp.net/"
+    },
+    "bugs": {
+        "url": "https://github.com/ytake/microCMS.Project/issues"
+    },
+    "homepage": "https://github.com/ytake/microCMS.Project",
     "devDependencies": {
         "gulp": "^3.8.8",
+        "bower": "*",
         "laravel-elixir": "*",
         "gulp-bower": "*",
         "gulp-react": "*",
@@ -17,6 +27,6 @@
         "main-bower-files": "*",
         "gulp-css-url-adjuster": "*",
         "gulp-notify": "*",
-        "gulp-phpunit": "*"
+        "gulp-shell": "*"
     }
 }
