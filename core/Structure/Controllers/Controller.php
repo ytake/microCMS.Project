@@ -1,9 +1,9 @@
 <?php
-namespace microCms\Structure\Controllers;
+namespace microCms\Controllers;
 
 /**
  * Class Controller
- * @package microCms\Structure\Controllers
+ * @package microCms\Controllers
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
 class Controller extends \Illuminate\Routing\Controller
@@ -22,17 +22,6 @@ class Controller extends \Illuminate\Routing\Controller
         if (!is_null($this->layout)) {
             $this->layout = \View::make($this->layout);
         }
-    }
-
-    /**
-     * view 描画
-     * @param string $path
-     * @param array $data
-     * @return \Illuminate\View\View
-     */
-    protected function view($path, $data = [])
-    {
-        $this->layout->content = \View::make($path, $data);
     }
 
     /**
@@ -56,4 +45,15 @@ class Controller extends \Illuminate\Routing\Controller
         \View::inject('description', e(str_replace(["\r\n","\r","\n"], '', $description)));
     }
 
+    /**
+     * @param $template
+     * @param array $attributes
+     * @param null $path
+     * @return \Illuminate\View\View
+     */
+    protected function view($template, array $attributes = [], $path = null)
+    {
+        $path = (is_null($path)) ? null : "{$path}.{$template}";
+        return \View::make($path, $attributes);
+    }
 }

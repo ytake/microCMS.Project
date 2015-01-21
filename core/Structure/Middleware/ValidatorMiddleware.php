@@ -1,15 +1,17 @@
 <?php
-namespace microCms\Structure\Middleware;
+namespace microCms\Middleware;
+
+use microCms\Requests\ResponseTrait;
 
 /**
- * Class RequestMiddleware
- * @package App\Middleware
+ * Class ValidatorMiddleware
+ * @package microCms\Middleware
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
 class ValidatorMiddleware extends AbstractMiddleware
 {
 
-    use \microCms\Structure\Requests\ResponseTrait;
+    use ResponseTrait;
 
     /** @var array  */
     protected $exclude = [

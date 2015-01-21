@@ -12,7 +12,8 @@
         "jquery":"*",
         "foundation": "*",
         "react": "0.*",
-        "font-awesome": "*"
+        "font-awesome": "*",
+        "showdown": "*"
     },
     "exportsOverride": {
 

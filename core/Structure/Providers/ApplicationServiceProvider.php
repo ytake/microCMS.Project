@@ -1,11 +1,11 @@
 <?php
-namespace microCms\Structure\Providers;
+namespace microCms\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
 /**
  * Class ApplicationServiceProvider
- * @package microCms\Structure\Providers
+ * @package microCms\Providers
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
 class ApplicationServiceProvider extends ServiceProvider

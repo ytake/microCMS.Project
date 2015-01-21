@@ -1,11 +1,11 @@
 <?php
-namespace microCms\Structure\Providers;
+namespace microCms\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
 /**
  * Class EventServiceProvider
- * @package microCms\Structure\Providers
+ * @package microCms\Providers
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
 class EventServiceProvider extends ServiceProvider
@@ -18,7 +18,7 @@ class EventServiceProvider extends ServiceProvider
     {
         /** @var \Illuminate\Events\Dispatcher $event */
         $event = $this->app['events'];
-        $event->listen('request.validate', "microCms\Structure\Dispatcher\ValidateDispatcher");
+        $event->listen('request.validate', "microCms\\Dispatcher\\ValidateDispatcher");
     }
 
 }

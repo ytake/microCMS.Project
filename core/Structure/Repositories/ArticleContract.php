@@ -1,9 +1,9 @@
 <?php
-namespace microCms\Structure\Repositories;
+namespace microCms\Repositories;
 
 /**
  * Interface ArticleContract
- * @package microCms\Structure\Repositories
+ * @package microCms\Repositories
  */
 interface ArticleContract
 {

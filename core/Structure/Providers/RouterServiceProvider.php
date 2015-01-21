@@ -1,11 +1,11 @@
 <?php
-namespace microCms\Structure\Providers;
+namespace microCms\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
 /**
  * Class RouterServiceProvider
- * @package microCms\Structure\Providers
+ * @package microCms\Providers
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
 class RouterServiceProvider extends ServiceProvider
@@ -27,8 +27,8 @@ class RouterServiceProvider extends ServiceProvider
         /** @var \Illuminate\Routing\Router $router */
         $router = $this->app['router'];
 
-        $router->filter('validator.middleware', 'microCms\Structure\Middleware\ValidatorMiddleware');
-        $router->filter('csrf', 'microCms\Structure\Middleware\CsrfMiddleware');
+        $router->filter('validator.middleware', 'microCms\Middleware\ValidatorMiddleware');
+        $router->filter('csrf', 'microCms\Middleware\CsrfMiddleware');
     }
 
 }

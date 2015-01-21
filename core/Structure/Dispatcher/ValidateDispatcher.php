@@ -1,13 +1,13 @@
 <?php
-namespace microCms\Structure\Dispatcher;
+namespace microCms\Dispatcher;
 
-use microCms\Structure\Requests\ResponseTrait;
-use microCms\Structure\Validators\ValidatorTrait;
-use microCms\Structure\Validators\ValidateRuleTrait;
+use microCms\Requests\ResponseTrait;
+use microCms\Validators\ValidatorTrait;
+use microCms\Validators\ValidateRuleTrait;
 
 /**
  * Class ValidateDispatcher
- * @package microCms\Structure\Dispatcher
+ * @package microCms\Dispatcher
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
 class ValidateDispatcher extends AbstractDispatcher

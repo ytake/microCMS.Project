@@ -1,9 +1,9 @@
 <?php
-namespace microCms\Structure\Dispatcher;
+namespace microCms\Dispatcher;
 
 /**
  * Class AbstractDispatcher
- * @package microCms\Structure\Dispatcher
+ * @package microCms\Dispatcher
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
 abstract class AbstractDispatcher

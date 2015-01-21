@@ -4,13 +4,14 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class Samples
+ * Class Configures
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
-class Samples extends Migration
+class Configures extends Migration
 {
 
-    protected $table = "samples";
+
+    protected $table = "configures";
 
     /**
      * Run the migrations.
@@ -20,11 +21,11 @@ class Samples extends Migration
     {
         \Schema::create($this->table, function($table) {
                 $table->engine = 'InnoDB';
-                $table->increments('sample_id');
-                $table->string('sample_name')->unique();
+                $table->increments('configure_id');
+                $table->string('configure_title')->unique();
+                $table->string('configure_value');
                 $table->timestamp('created_at');
                 $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-                $table->index(['sample_id', 'sample_name'], 'SECTION_INDEX');
             }
         );
     }

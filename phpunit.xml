@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="bootstrap/autoload.php"
+         bootstrap="core/bootstrap/autoload.php"
          colors="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
@@ -12,12 +12,17 @@
         >
     <testsuites>
         <testsuite name="Application Test Suite">
-            <directory suffix="Test.php">./tests/</directory>
+            <directory suffix="Test.php">./tests</directory>
+            <directory suffix="Test.php">./core/tests</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
-            <directory>./app/App</directory>
+            <directory>./application/classes</directory>
+            <directory>./core/Structure</directory>
+            <exclude>
+                <directory>./core/Structure/Providers</directory>
+            </exclude>
         </whitelist>
     </filter>
     <logging>

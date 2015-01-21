@@ -23,12 +23,12 @@
         "phpunit/phpunit": "4.*",
         "mockery/mockery": "0.*",
         "satooshi/php-coveralls": "dev-master",
-        "barryvdh/laravel-ide-helper": "1.*",
-        "facebook/xhprof": "dev-master"
+        "barryvdh/laravel-ide-helper": "1.*"
     },
     "autoload": {
         "psr-4": {
-            "microCms\\": "core"
+            "microCms\\": "core/Structure",
+            "App\\": "application/classes"
         }
     },
     "autoload-dev": {
@@ -53,8 +53,8 @@
         "preferred-install": "dist"
     },
     "suggest": {
-        "ext-xhprof": "facebook/xhprof",
-        "lib-graphviz": "The graphviz library is used for displaying the execution path in a kind of flowchart between methods."
+        "ext-zmq": "push notification",
+        "lib-zmq": "required php-zmq"
     },
     "minimum-stability": "stable"
 }

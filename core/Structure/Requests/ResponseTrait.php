@@ -1,9 +1,9 @@
 <?php
-namespace microCms\Structure\Requests;
+namespace microCms\Requests;
 
 /**
  * Class ResponseTrait
- * @package microCms\Structure\Requests
+ * @package microCms\Requests
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
 trait ResponseTrait

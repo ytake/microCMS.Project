@@ -1,11 +1,11 @@
 <?php
-namespace microCms\Structure\Controllers\Api;
+namespace microCms\Controllers\Api;
 
-use microCms\Structure\Controllers\Controller;
+use microCms\Controllers\Controller;
 
 /**
  * Class ArticleResource
- * @package microCms\Structure\Controllers\Api
+ * @package microCms\Controllers\Api
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
 class ArticleResource extends Controller

@@ -1,9 +1,9 @@
 <?php
-namespace microCms\Structure\Validators;
+namespace microCms\Validators;
 
 /**
  * Class ValidateRuleTrait
- * @package microCms\Structure\Validators
+ * @package microCms\Validators
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
 trait ValidateRuleTrait

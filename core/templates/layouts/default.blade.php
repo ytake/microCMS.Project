@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="" />
     <meta http-equiv="x-dns-prefetch-control" content="on">
-    <title>@yield('title', 'Laravel')</title>
+    <title>@yield('title', 'microCMS.Project')</title>
     <link rel="dns-prefetch" href="//maxcdn.bootstrapcdn.com">
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
     <link rel="apple-touch-icon-precomposed" href="/icon/favicon.png">
@@ -21,13 +21,10 @@
 </head>
 <body>
 @include('elements.header')
-<div class="container">
-    @yield('content')
-</div>
+@yield('content')
 @include('elements.footer')
-<script src="/js/react.min.js"></script>
+<script src="/js/react-with-addons.min.js"></script>
 <script src="/js/app.js"></script>
 @yield('scripts')
-@yield('debug.profiler', null)
 </body>
 </html>

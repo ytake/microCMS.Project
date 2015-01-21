@@ -1,15 +1,17 @@
 <?php
-namespace microCms\Structure\Middleware;
+namespace microCms\Middleware;
+
+use microCms\Requests\ResponseTrait;
 
 /**
  * Class CsrfMiddleware
- * @package App\Middleware
+ * @package microCms\Middleware
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
 class CsrfMiddleware extends AbstractMiddleware
 {
 
-    use \microCms\Structure\Requests\ResponseTrait;
+    use ResponseTrait;
 
     /**
      * @throws \Illuminate\Session\TokenMismatchException

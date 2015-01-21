@@ -72,5 +72,7 @@ elixir(function (mix) {
         .copy(bowerDir + "/jquery/dist/jquery.min.js", jsOutput + "/jquery.min.js")
         .copy(bowerDir + "/react/react.min.js", jsOutput + "/react.min.js")
         .copy(bowerDir + "/react/react-with-addons.min.js", jsOutput + "/react-with-addons.min.js")
+        .copy(bowerDir + "/showdown/compressed/showdown.min.js", jsOutput + "/showdown.min.js")
+        .copy(bowerDir + "/showdown/compressed/extensions/github.min.js", jsOutput + "/extensions/github.min.js")
         .pathReplace();
 });

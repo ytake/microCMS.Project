@@ -1,9 +1,9 @@
 <?php
-namespace microCms\Structure\Validators;
+namespace microCms\Validators;
 
 /**
- * Custom Validator Class
- * @package microCms\Structure\Validators
+ * Class Validator
+ * @package microCms\Validators
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
 class Validator extends \Illuminate\Validation\Validator

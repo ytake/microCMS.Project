@@ -54,4 +54,8 @@ return [
 
     'storage' => __DIR__.'/../../storage',
 
+    /**
+     * this project core directory
+     */
+    'system' => __DIR__ . '/../',
 ];

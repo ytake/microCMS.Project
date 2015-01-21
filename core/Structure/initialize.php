@@ -234,7 +234,7 @@ $app->booted(function() use ($app, $env)
     |
     */
 
-    $path = __DIR__ . '/start/global.php';
+    $path = __DIR__ . '/../start/global.php';
 
     if (file_exists($path)) require $path;
 
@@ -249,7 +249,7 @@ $app->booted(function() use ($app, $env)
     |
     */
 
-    $path = __DIR__ . "/start/{$env}.php";
+    $path = __DIR__ . "/../start/{$env}.php";
 
     if (file_exists($path)) require $path;
 

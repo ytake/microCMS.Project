@@ -11,7 +11,7 @@
 |
 */
 
-$app = new \microCms\Structure\ApplicationCore;
+$app = new \microCms\ApplicationCore;
 
 /*
 |--------------------------------------------------------------------------

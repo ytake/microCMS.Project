@@ -1,9 +1,9 @@
 <?php
-namespace microCms\Structure\Middleware;
+namespace microCms\Middleware;
 
 /**
  * Class AbstractMiddleware
- * @package microCms\Structure\Middleware
+ * @package microCms\Middleware
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
 abstract class AbstractMiddleware
