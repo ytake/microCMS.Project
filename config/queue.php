@@ -1,4 +1,3 @@
-l
 <?php
 
 return [

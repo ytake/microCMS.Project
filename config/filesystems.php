@@ -61,7 +61,11 @@ return [
             'region' => 'IAD',
             'url_type' => 'publicURL'
         ],
-
+        'dropbox' => [
+            'driver' => 'dropbox',
+            'token' => 'your-token',
+            'appName' => 'your-app',
+        ],
     ],
 
 ];

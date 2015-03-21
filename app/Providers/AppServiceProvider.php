@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        // dd(config('project.entry'));
     }
 
 }

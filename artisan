@@ -13,9 +13,9 @@
 |
 */
 
-require __DIR__.'/bootstrap/autoload.php';
+require __DIR__ . '/bootstrap/autoload.php';
 
-$app = require_once __DIR__.'/bootstrap/app.php';
+$app = require_once __DIR__ . '/bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -27,12 +27,12 @@ $app = require_once __DIR__.'/bootstrap/app.php';
 | or another output device for the developers. Here goes nothing!
 |
 */
-
+/** @var \Illuminate\Contracts\Console\Kernel $kernel */
 $kernel = $app->make('Illuminate\Contracts\Console\Kernel');
 
 $status = $kernel->handle(
-	$input = new Symfony\Component\Console\Input\ArgvInput,
-	new Symfony\Component\Console\Output\ConsoleOutput
+    $input = new Symfony\Component\Console\Input\ArgvInput,
+    new Symfony\Component\Console\Output\ConsoleOutput
 );
 
 /*

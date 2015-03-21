@@ -2,3 +2,5 @@
 /node_modules
 .env
 .idea
+.phpstorm.meta.php
+_ide_helper.php

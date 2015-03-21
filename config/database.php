@@ -56,7 +56,7 @@ return [
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
+            'collation' => 'utf8_general_ci',
             'prefix' => '',
             'strict' => false,
         ],
@@ -78,7 +78,13 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'prefix' => '',
         ],
-
+        'voltdb' => [
+            'driver' => 'voltdb',
+            'host' => env('DB_HOST', 'localhost'),
+            'username' => env('DB_USERNAME', ''),
+            'password' => env('DB_PASSWORD', ''),
+            'port' => 21212
+        ],
     ],
     /*
     |--------------------------------------------------------------------------
