@@ -1,78 +1,86 @@
 var elixir = require('laravel-elixir'),
     gulp = require('gulp'),
     bower = require('bower'),
-    shell = require('gulp-shell'),
-    react = require('gulp-react'),
     notify = require('gulp-notify'),
-    urlAdjuster = require('gulp-css-url-adjuster');
+    react = require('gulp-react'),
+    uglify = require('gulp-uglify'),
+    minifyCSS = require('gulp-minify-css'),
+    gulpFilter = require('gulp-filter'),
+    urlAdjuster = require('gulp-css-url-adjuster'),
+    mainBowerFiles = require('main-bower-files');
 
-var jsOutput = elixir.config.jsOutput,
-    bowerDir = elixir.config.bowerDir,
-    assetsDir = elixir.config.assetsDir;
+var assetsDir = elixir.config.assetsDir;
 
-var paths = {
-    foundation: bowerDir + '/foundation/',
-    fontAwesome: bowerDir + '/font-awesome/'
-};
-
-
-gulp.task('bower', function () {
-    return bower.commands.install([], {save: true}, {})
-        .on('end', function (data) {
-            console.log(data);
-        });
-});
-
-elixir.extend('awesome', function () {
-    gulp.task('fontAwesome', function () {
-        return gulp.src(paths.fontAwesome + 'scss/**/*.scss')
-            .pipe(gulp.dest(assetsDir + '/sass/font-awesome'));
+elixir.extend('bowerInstall', function () {
+    gulp.task('bower', function () {
+        return bower.commands.install([], {save: true}, {})
+            .on('end', function (data) {
+                console.log(data);
+            });
     });
-    return this.queueTask("fontAwesome");
+    return this.queueTask("bower");
 });
 
-elixir.extend('foundation', function () {
-    gulp.task('copyfoundation', ['bower'], function () {
-        return gulp.src(paths.foundation + 'scss/**/*.scss')
-            .pipe(gulp.dest(assetsDir + '/sass/foundation'));
+/**
+ * bower install後に各assetsファイルを指定のディレクトリへ設置します
+ * $ gulp publish
+ * bowerタスクは自動で実行されます
+ */
+elixir.extend('assetsPublish', function () {
+    gulp.task('publish', function () {
+        var jsFilter = gulpFilter('**/*.js');
+        var cssFilter = gulpFilter('**/*.css');
+        var fontFilter = gulpFilter([
+            "**/roboto-*",
+            "**/Material-*"
+        ]);
+        var imageFilter = gulpFilter(['**/*.png', "**/*.gif"]);
+        return gulp.src(
+            mainBowerFiles({
+                paths: {
+                    bowerDirectory: 'vendor/bower_components',
+                    bowerrc: '.bowerrc',
+                    bowerJson: 'bower.json'
+                }
+            })
+        )
+            .pipe(jsFilter)
+            .pipe(gulp.dest('public/assets/js'))
+            .pipe(jsFilter.restore())
+            .pipe(cssFilter)
+            .pipe(urlAdjuster({
+                replace: ['../fonts/', ''],
+                prepend: '/assets/fonts/'
+            }))
+            .pipe(minifyCSS())
+            .pipe(gulp.dest('public/assets/css'))
+            .pipe(cssFilter.restore())
+            .pipe(fontFilter)
+            .pipe(gulp.dest('public/assets/fonts'))
+            .pipe(fontFilter.restore())
+            .pipe(imageFilter)
+            .pipe(gulp.dest('public/images'));
     });
-    return this.queueTask("copyfoundation");
+    return this.queueTask("publish");
 });
-
-elixir.extend('reacter', function () {
-    gulp.task('reacter', function () {
-        return gulp.src('resources/assets/jsx/*.jsx')
+/**
+ * React.js コンパイル
+ * $ gulp react
+ */
+elixir.extend('reactPreCompile', function () {
+    gulp.task('react', function () {
+        return gulp.src('resources/js/react/**/*.jsx')
             .pipe(react())
+            .pipe(uglify())
             .pipe(gulp.dest('public/js'));
     });
-    return this.queueTask('reacter');
-});
-
-elixir.extend('pathReplace', function () {
-    gulp.task("replace", function () {
-        return gulp.src(
-            [
-                'public/css/font-awesome/font-awesome.css'
-            ])
-            .pipe(urlAdjuster({
-                replace:  ['../fonts/', ''],
-                prepend: '/fonts/'
-            }))
-            .pipe(gulp.dest('public/css/font-awesome'));
-    });
-    return this.queueTask('replace');
+    this.registerWatcher('react', 'resources/js/react/**/*.jsx');
+    return this.queueTask("react");
 });
 
 elixir(function (mix) {
-    mix.foundation()
-        .awesome()
-        .sass("**/*.scss")
-        .reacter()
-        .copy(bowerDir + "/font-awesome/fonts", "public/fonts")
-        .copy(bowerDir + "/jquery/dist/jquery.min.js", jsOutput + "/jquery.min.js")
-        .copy(bowerDir + "/react/react.min.js", jsOutput + "/react.min.js")
-        .copy(bowerDir + "/react/react-with-addons.min.js", jsOutput + "/react-with-addons.min.js")
-        .copy(bowerDir + "/showdown/compressed/showdown.min.js", jsOutput + "/showdown.min.js")
-        .copy(bowerDir + "/showdown/compressed/extensions/github.min.js", jsOutput + "/extensions/github.min.js")
-        .pathReplace();
+    mix.bowerInstall()
+        .assetsPublish()
+        .reactPreCompile()
+        .sass("*.scss");
 });

@@ -1,24 +1,39 @@
 {
-    "name": "microcms-project",
-    "version": "0.0.1",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "test",
-        "tests"
-    ],
-    "dependencies": {
-        "jquery":"*",
-        "foundation": "*",
-        "react": "0.*",
-        "font-awesome": "*",
-        "showdown": "*"
+  "name": "Laravel.JpCollective",
+  "version": "0.0.1",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "0.*",
+    "highlightjs" : "*",
+    "materialize": "*"
+  },
+  "exportsOverride": {
+  },
+  "overrides": {
+    "react": {
+      "main": [
+        "**/*.min.js"
+      ]
     },
-    "exportsOverride": {
-
+    "materialize": {
+      "main": [
+        "**/*.min.js",
+        "**/*.min.css",
+        "**/Material-*",
+        "**/roboto-*"
+      ]
     },
-    "overrides": {
-
+    "highlightjs": {
+      "main": [
+        "**/*.pack.js",
+        "**/github.css"
+      ]
     }
+  }
 }

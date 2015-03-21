@@ -4,3 +4,16 @@ checks:
   php:
     code_rating: true
     duplication: true
+filter:
+  excluded_paths:
+    - tests/*
+    - spec/*
+build:
+  tests:
+    override:
+      -
+        command: phpunit --coverage-clover=build/logs/clover.xml
+        coverage:
+          file: build/logs/clover.xml
+          format: php-clover
+          
