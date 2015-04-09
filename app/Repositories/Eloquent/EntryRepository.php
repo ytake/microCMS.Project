@@ -8,12 +8,18 @@ use App\Repositories\EntryRepositoryInterface;
  * @package App\Repositories
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
-class EntryRepository extends Entry implements EntryRepositoryInterface
+class EntryRepository implements EntryRepositoryInterface
 {
 
-    public function __construct()
-    {
+    /** @var Entry  */
+    protected $entry;
 
+    /**
+     * @param Entry $entry
+     */
+    public function __construct(Entry $entry)
+    {
+        $this->entry = $entry;
     }
 
     /**
@@ -23,7 +29,7 @@ class EntryRepository extends Entry implements EntryRepositoryInterface
      */
     public function getEntries($offset = 10)
     {
-        // TODO: Implement getEntries() method.
+        return $this->entry->paginate($offset);
     }
 
     /**
@@ -33,7 +39,7 @@ class EntryRepository extends Entry implements EntryRepositoryInterface
      */
     public function getEntry($entryId)
     {
-        // TODO: Implement getEntry() method.
+        return $this->entry->on('slave')->find($entryId);
     }
 
     /**

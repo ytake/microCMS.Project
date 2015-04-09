@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Repositories\EntryRepositoryInterface;
+
 /**
  * Class IndexController
  * @package App\Http\Controllers
@@ -13,9 +15,9 @@ class IndexController extends Controller
      * @Get("/", as="index")
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(EntryRepositoryInterface $entry)
     {
-
+        dd($entry->getEntries());
     }
 
 }

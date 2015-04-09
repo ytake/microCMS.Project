@@ -3,6 +3,11 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
+/**
+ * Class Kernel
+ * @package App\Http
+ * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
+ */
 class Kernel extends HttpKernel
 {
 
@@ -12,7 +17,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        'Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode',
+        // 'Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode',
         'Illuminate\Cookie\Middleware\EncryptCookies',
         'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
         'Illuminate\Session\Middleware\StartSession',
@@ -26,9 +31,9 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => 'App\Http\Middleware\Authenticate',
-        'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-        'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
+        // 'auth' => 'App\Http\Middleware\Authenticate',
+        // 'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
+        // 'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
     ];
 
 }
