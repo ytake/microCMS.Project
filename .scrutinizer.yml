@@ -16,4 +16,3 @@ build:
         coverage:
           file: build/logs/clover.xml
           format: php-clover
-          

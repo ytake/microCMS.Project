@@ -1,10 +1,9 @@
 <?php
-namespace App\Http\Middleware;
+namespace MicroApp\Http\Middleware;
 
 use Closure;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 
-class VerifyCsrfToken extends BaseVerifier
+class ExampleMiddleware
 {
 
     /**
@@ -16,7 +15,7 @@ class VerifyCsrfToken extends BaseVerifier
      */
     public function handle($request, Closure $next)
     {
-        return parent::handle($request, $next);
+        return $next($request);
     }
 
 }

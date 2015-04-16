@@ -1,20 +1,12 @@
 {
-  "name": "Laravel.JpCollective",
+  "name": "microCms.project",
   "version": "1.0.0",
-  "description": "Laravel.JpCollective",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": {
     "name" : "Yuuki Takezawa",
     "email" : "yuuki.takezawa@comnect.jp.net",
     "url" : "http://blog.comnect.jp.net/"
   },
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ytake/Laravel.JpCollective/issues"
-  },
-  "homepage": "https://github.com/ytake/Laravel.JpCollective",
   "devDependencies": {
     "gulp": "^3.8.8",
     "bower": "*",

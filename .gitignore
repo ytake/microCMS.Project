@@ -1,6 +1,6 @@
+/lumen.log
 /vendor
-/node_modules
 .env
+/node_modules
 .idea
-.phpstorm.meta.php
-_ide_helper.php
+

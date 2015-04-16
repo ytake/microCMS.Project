@@ -4,7 +4,7 @@ class ExampleTest extends TestCase
 {
 
     /**
-     * A basic functional test example.
+     * A basic test example.
      *
      * @return void
      */
@@ -12,7 +12,8 @@ class ExampleTest extends TestCase
     {
         $response = $this->call('GET', '/');
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertResponseOk();
+        $this->assertEquals('Hello World', $response->getContent());
     }
 
 }
