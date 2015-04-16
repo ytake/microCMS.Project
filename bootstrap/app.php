@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// Dotenv::load(__DIR__.'/../');
+Dotenv::load(__DIR__ . '/../');
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +15,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 |
 */
 
-$app = new Laravel\Lumen\Application;
+$app = new \MicroApp\Core\Application;
 
 // $app->withFacades();
 
@@ -53,13 +53,13 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//     // 'Illuminate\Cookie\Middleware\EncryptCookies',
-//     // 'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
-//     // 'Illuminate\Session\Middleware\StartSession',
-//     // 'Illuminate\View\Middleware\ShareErrorsFromSession',
-//     // 'Laravel\Lumen\Http\Middleware\VerifyCsrfToken',
-// ]);
+$app->middleware([
+     'Illuminate\Cookie\Middleware\EncryptCookies',
+     'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
+     'Illuminate\Session\Middleware\StartSession',
+     'Illuminate\View\Middleware\ShareErrorsFromSession',
+     'Laravel\Lumen\Http\Middleware\VerifyCsrfToken',
+]);
 
 // $app->routeMiddleware([
 
@@ -76,7 +76,8 @@ $app->singleton(
 |
 */
 
-// $app->register('App\Providers\AppServiceProvider');
+$app->register('MicroApp\Providers\AppServiceProvider');
+$app->register('MicroApp\Providers\SocialiteServiceProvider');
 
 /*
 |--------------------------------------------------------------------------

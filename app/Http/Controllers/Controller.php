@@ -1,9 +1,9 @@
 <?php
-namespace MicroApp\Http\Controllers;
+namespace MicroApp\Http\Controllers\Api;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
 
-class Controller extends BaseController
+class ArticleController extends BaseController
 {
     //
 }

@@ -1,16 +1,9 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-$app->get('/', function() use ($app) {
-    return $app->welcome();
+/** @var \MicroApp\Core\Application $app */
+$app->get('/about', function() use ($app) {
+    return view('about');
+});
+$app->group(['namespace' => 'MicroApp\Http\Controllers\Managed'], function($app) {
+    $app->get('/managed/login', 'AuthController@login');
 });
