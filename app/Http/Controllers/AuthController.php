@@ -1,5 +1,5 @@
 <?php
-namespace MicroApp\Http\Controllers\Managed;
+namespace MicroApp\Http\Controllers;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -14,6 +14,7 @@ class AuthController extends BaseController
     /**
      * login
      * uri: managed/login
+     * @Get("/login", as="auth.login")
      * @return \Illuminate\View\View
      */
     public function login()
@@ -24,6 +25,7 @@ class AuthController extends BaseController
     /**
      * login
      * uri: managed/callback
+     * @Get("/callback", as="auth.callback")
      * @return \Illuminate\View\View
      */
     public function callback()
@@ -31,6 +33,9 @@ class AuthController extends BaseController
 
     }
 
+    /**
+     * @Get("/logout", as="auth.logout")
+     */
     public function logout()
     {
 

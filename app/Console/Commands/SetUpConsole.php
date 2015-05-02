@@ -3,6 +3,7 @@ namespace MicroApp\Console\Commands;
 
 use Illuminate\Console\Command;
 use MicroApp\Services\InitializeService;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Helper\ProgressBar;
 
 /**
@@ -54,8 +55,6 @@ class SetUpConsole extends Command
      */
     public function fire()
     {
-        $this->inProgress();
-        return;
         if(! $this->proceed) {
             $this->questionUseMedia();
 
@@ -126,17 +125,47 @@ class SetUpConsole extends Command
         $this->inProgress();
     }
 
+    /**
+     * generate .env file task progress
+     */
     private function inProgress()
     {
+        $production = $this->option('production');
         $progress = new ProgressBar($this->output);
         $progress->setBarCharacter('<comment>=</comment>');
-        $progress->setFormat('normal');
-
+        $progress->setFormat('verbose');
         $progress->start();
         $i = 0;
         while ($i++ < 1) {
+            $progress->setMessage('in progress...');
+            $this->service->generateEnvironmentFile(
+                $this->getEnvironmentParams(), $production
+            );
             $progress->advance(1);
         }
         $progress->finish();
+    }
+
+    /**
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [
+            ['production', '-p', InputOption::VALUE_NONE, 'set environment'],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getEnvironmentParams()
+    {
+        return [
+            'CMS_SOCIAL_DRIVER' => $this->socialMedia,
+            'CMS_SOCIAL_ACCOUNT' => $this->useAccountName,
+            'CMS_STORAGE_DRIVER' => $this->storage,
+            'CMS_SETUP' => 'true',
+        ];
     }
 }

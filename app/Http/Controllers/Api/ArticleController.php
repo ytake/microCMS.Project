@@ -12,6 +12,7 @@ class ArticleController extends BaseController
 {
 
     /**
+     * @Get("/articles", as="articles")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function articles()

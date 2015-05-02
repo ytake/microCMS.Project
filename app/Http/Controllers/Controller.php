@@ -12,8 +12,7 @@ class Controller extends BaseController
 {
 
     /**
-     * Show the Index Page
-     * @Get("/", as="index")
+     * @Get("/", as="index", middleware="setup")
      */
     public function index()
     {
@@ -21,11 +20,10 @@ class Controller extends BaseController
     }
 
     /**
-     * Show the Index Page
      * @Get("/setup", as="setup")
      */
     public function setup()
     {
-
+        return view('setup');
     }
 }

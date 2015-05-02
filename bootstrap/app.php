@@ -2,7 +2,11 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-Dotenv::load(__DIR__ . '/../');
+try {
+    Dotenv::load(__DIR__ . '/../');
+} catch(\InvalidArgumentException $e) {
+
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -61,12 +65,12 @@ $app->middleware([
     'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
     'Illuminate\Session\Middleware\StartSession',
     'Illuminate\View\Middleware\ShareErrorsFromSession',
-    'Laravel\Lumen\Http\Middleware\VerifyCsrfToken',
+    'Laravel\Lumen\Http\Middleware\VerifyCsrfToken'
 ]);
 
-// $app->routeMiddleware([
-
-// ]);
+$app->routeMiddleware([
+    'setup' => 'MicroApp\Http\Middleware\VerifySetUpMiddleware'
+]);
 
 /*
 |--------------------------------------------------------------------------

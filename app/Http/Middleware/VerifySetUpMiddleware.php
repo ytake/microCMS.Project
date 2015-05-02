@@ -20,7 +20,7 @@ class VerifySetUpMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(! env('CMS_SETUP', false)) {
+        if(!env('CMS_SETUP', false)) {
             return redirect()->route('setup');
         }
         return $next($request);
