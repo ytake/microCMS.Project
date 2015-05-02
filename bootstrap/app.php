@@ -15,7 +15,10 @@ Dotenv::load(__DIR__ . '/../');
 |
 */
 
-$app = new \MicroApp\Core\Application;
+$app = new MicroApp\Core\Application(
+    realpath(__DIR__ . '/../')
+);
+
 
 // $app->withFacades();
 
@@ -54,11 +57,11 @@ $app->singleton(
 */
 
 $app->middleware([
-     'Illuminate\Cookie\Middleware\EncryptCookies',
-     'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
-     'Illuminate\Session\Middleware\StartSession',
-     'Illuminate\View\Middleware\ShareErrorsFromSession',
-     'Laravel\Lumen\Http\Middleware\VerifyCsrfToken',
+    'Illuminate\Cookie\Middleware\EncryptCookies',
+    'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
+    'Illuminate\Session\Middleware\StartSession',
+    'Illuminate\View\Middleware\ShareErrorsFromSession',
+    'Laravel\Lumen\Http\Middleware\VerifyCsrfToken',
 ]);
 
 // $app->routeMiddleware([
@@ -78,6 +81,7 @@ $app->middleware([
 
 $app->register('MicroApp\Providers\AppServiceProvider');
 $app->register('MicroApp\Providers\SocialiteServiceProvider');
+$app->register('MicroApp\Providers\AnnotationServiceProvider');
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +94,10 @@ $app->register('MicroApp\Providers\SocialiteServiceProvider');
 |
 */
 
-require __DIR__ . '/../app/Http/routes.php';
+// require __DIR__ . '/../app/Http/routes.php';
+if(file_exists($scanned = storage_path() . '/framework/routes.scanned.php')) {
+    $router = $app;
+    require $scanned;
+}
 
 return $app;

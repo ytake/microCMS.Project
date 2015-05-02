@@ -11,7 +11,7 @@
   "dependencies": {
     "react": "0.*",
     "highlightjs" : "*",
-    "materialize": "*"
+    "bootstrap": "*"
   },
   "exportsOverride": {
   },
@@ -21,12 +21,11 @@
         "**/*.min.js"
       ]
     },
-    "materialize": {
+    "bootstrap": {
       "main": [
         "**/*.min.js",
         "**/*.min.css",
-        "**/Material-*",
-        "**/roboto-*"
+        "**/glyphicons-*"
       ]
     },
     "highlightjs": {

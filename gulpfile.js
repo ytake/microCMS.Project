@@ -31,8 +31,7 @@ elixir.extend('assetsPublish', function () {
         var jsFilter = gulpFilter('**/*.js');
         var cssFilter = gulpFilter('**/*.css');
         var fontFilter = gulpFilter([
-            "**/roboto-*",
-            "**/Material-*"
+            "**/glyphicons-*"
         ]);
         var imageFilter = gulpFilter(['**/*.png', "**/*.gif"]);
         return gulp.src(

@@ -11,30 +11,11 @@ class Application extends \Laravel\Lumen\Application
 {
 
     /**
-     * Register the core container aliases.
-     *
-     * @return void
+     * @param null $basePath
      */
-    protected function registerContainerAliases()
+    public function __construct($basePath = null)
     {
-        $this->aliases = [
-            'Illuminate\Contracts\Foundation\Application' => 'app',
-            'Illuminate\Contracts\Auth\Guard' => 'auth',
-            'Illuminate\Contracts\Auth\PasswordBroker' => 'auth.password',
-            'Illuminate\Contracts\Cache\Factory' => 'cache',
-            'Illuminate\Contracts\Cache\Repository' => 'cache.store',
-            'Illuminate\Contracts\Cookie\Factory' => 'cookie',
-            'Illuminate\Contracts\Cookie\QueueingFactory' => 'cookie',
-            'Illuminate\Contracts\Encryption\Encrypter' => 'encrypter',
-            'Illuminate\Contracts\Events\Dispatcher' => 'events',
-            'Illuminate\Contracts\Filesystem\Factory' => 'filesystem',
-            'Illuminate\Contracts\Hashing\Hasher' => 'hash',
-            'Illuminate\Contracts\Mail\Mailer' => 'mailer',
-            'Illuminate\Contracts\Queue\Queue' => 'queue.connection',
-            'request' => 'Illuminate\Http\Request',
-            'Illuminate\Session\SessionManager' => 'session',
-            'Illuminate\Contracts\View\Factory' => 'view',
-        ];
+        parent::__construct($basePath);
     }
 
     /**
@@ -70,9 +51,6 @@ class Application extends \Laravel\Lumen\Application
         'Psr\Log\LoggerInterface' => 'registerLogBindings',
         'mailer' => 'registerMailBindings',
         'Illuminate\Contracts\Mail\Mailer' => 'registerMailBindings',
-        'queue' => 'registerQueueBindings',
-        'queue.connection' => 'registerQueueBindings',
-        'Illuminate\Contracts\Queue\Queue' => 'registerQueueBindings',
         'request' => 'registerRequestBindings',
         'Illuminate\Http\Request' => 'registerRequestBindings',
         'session' => 'registerSessionBindings',
@@ -83,6 +61,25 @@ class Application extends \Laravel\Lumen\Application
         'validator' => 'registerValidatorBindings',
         'view' => 'registerViewBindings',
         'Illuminate\Contracts\View\Factory' => 'registerViewBindings',
+        'path.storage' => 'registerStoragePathBindings'
     ];
 
+    /**
+     * @return bool
+     */
+    public function routesAreCached()
+    {
+        return false;
+    }
+
+    /**
+     * Register container bindings for the application.
+     * @return void
+     */
+    protected function registerStoragePathBindings()
+    {
+        $this->singleton('path.storage', function () {
+            return storage_path();
+        });
+    }
 }

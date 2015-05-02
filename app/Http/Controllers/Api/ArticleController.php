@@ -1,5 +1,5 @@
 <?php
-namespace MicroApp\Http\Controllers\Managed;
+namespace MicroApp\Http\Controllers\Api;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -11,18 +11,11 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 class ArticleController extends BaseController
 {
 
-    public function form()
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function articles()
     {
-
-    }
-
-    public function confirm()
-    {
-
-    }
-
-    public function apply()
-    {
-
+        return response()->json([]);
     }
 }
