@@ -2,56 +2,68 @@
 namespace MicroApp\Services;
 
 use Illuminate\Support\Str;
-use Illuminate\Filesystem\Filesystem;
+use MicroApp\Repositories\EnvironmentRepositoryInterface;
 
 /**
  * Class InitializeService
  * @package MicroApp\Services
  * @author yuuki.takezawa<yuuki.takezawa@comnect.jp.net>
  */
-class InitializeService
+class InitializeService implements InitializeServiceInterface
 {
 
-    /** @var Filesystem */
-    protected $file;
+    /** @var EnvironmentRepositoryInterface  */
+    protected $env;
 
     const DEFAULT_KEY = 'SomeRandomKey!!!';
 
     /**
-     * @param Filesystem $file
+     * @param EnvironmentRepositoryInterface $env
      */
-    public function __construct(Filesystem $file)
+    public function __construct(EnvironmentRepositoryInterface $env)
     {
-        $this->file = $file;
+        $this->env = $env;
     }
 
     /**
-     * @param array $addParams
+     * @return array
+     */
+    public function getEnvironments()
+    {
+        return $this->env->parseEnvironments();
+    }
+
+    /**
+     * @param array $params
      * @param bool $production
      * @return int
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    public function generateEnvironmentFile(array $addParams = [], $production = false)
+    public function generateEnvironmentFile(array $params = [], $production = false)
     {
-        app()->configure('app');
-        if ($this->copyEnvironmentFile()) {
-            $content = $this->file->get($this->environmentFile());
+        if ($this->env->copyEnvironmentFile()) {
+            $content = $this->env->getEnvContent($this->env->environmentFile());
+            app()->configure('app');
             if (config('app.key') === self::DEFAULT_KEY) {
                 $content = str_replace(self::DEFAULT_KEY, $this->generateKey(), $content);
             }
-            if (count($addParams)) {
-                foreach ($addParams as $key => $value) {
-                    $content .= "\n{$key}={$value}";
+            if (count($params)) {
+                foreach ($params as $key => $value) {
+                    if(preg_match("/{$key}=(\w+)/", $content)) {
+                        $content = preg_replace("/{$key}=(\w+)/", "{$key}={$value}", $content);
+                    } else {
+                        $content .= "\n{$key}={$value}";
+                    }
                 }
             }
             if ($production) {
                 $content = str_replace("APP_ENV=local", "APP_ENV=production", $content);
                 $content = str_replace("APP_DEBUG=true", "APP_DEBUG=false", $content);
             }
-            return $this->file->put($this->environmentFile(), $content);
+            return $this->env->setPutEnvFileContent($content);
         }
         throw new \Illuminate\Contracts\Filesystem\FileNotFoundException(
-            "Not Found: " . $this->environmentFile()
+            "Not Found: " . $this->env->environmentFile()
         );
     }
 
@@ -62,28 +74,6 @@ class InitializeService
     protected function generateKey()
     {
         return Str::random(32);
-    }
-
-    /**
-     * @return bool
-     */
-    public function copyEnvironmentFile()
-    {
-        if (!$this->file->exists($this->environmentFile())) {
-            return $this->file->copy(
-                base_path() . '/.env.example',
-                $this->environmentFile()
-            );
-        }
-        return true;
-    }
-
-    /**
-     * @return string
-     */
-    protected function environmentFile()
-    {
-        return base_path() . '/.env';
     }
 
 }

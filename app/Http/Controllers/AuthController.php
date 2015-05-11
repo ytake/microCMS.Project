@@ -1,6 +1,7 @@
 <?php
 namespace MicroApp\Http\Controllers;
 
+use MicroApp\Services\AuthenticateService;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 /**
@@ -23,14 +24,29 @@ class AuthController extends BaseController
     }
 
     /**
+     * @Post("/auth", as="auth.provide")
+     * @param AuthenticateService $auth
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function authProvider(AuthenticateService $auth)
+    {
+        return $auth->getProvider()->redirect();
+    }
+
+    /**
      * login
      * uri: managed/callback
      * @Get("/callback", as="auth.callback")
+     * @param AuthenticateService $auth
      * @return \Illuminate\View\View
      */
-    public function callback()
+    public function callback(AuthenticateService $auth)
     {
-
+        $result = $auth->socialiteAttempt();
+        if($result) {
+            $auth->login($result);
+        }
+        return redirect()->route('managed.top');
     }
 
     /**

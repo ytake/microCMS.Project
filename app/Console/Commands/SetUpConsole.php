@@ -2,7 +2,7 @@
 namespace MicroApp\Console\Commands;
 
 use Illuminate\Console\Command;
-use MicroApp\Services\InitializeService;
+use MicroApp\Services\InitializeServiceInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Helper\ProgressBar;
 
@@ -14,35 +14,24 @@ use Symfony\Component\Console\Helper\ProgressBar;
 class SetUpConsole extends Command
 {
 
-    const OK = 'ok';
-
-    const NG = 'ng';
-
     /** @var string */
     protected $name = 'cms:setup';
 
     /** @var string */
     protected $description = "setup application";
 
-    /** @var null|string */
-    protected $socialMedia = null;
-
-    /** @var null  */
-    protected $storage = null;
-
-    /** @var null  */
-    protected $useAccountName = null;
-
     /** @var bool  */
     protected $proceed = false;
 
-    /** @var InitializeService */
+    /** @var InitializeServiceInterface */
     protected $service;
 
+    protected $keys = [];
+
     /**
-     * @param InitializeService $service
+     * @param InitializeServiceInterface $service
      */
-    public function __construct(InitializeService $service)
+    public function __construct(InitializeServiceInterface $service)
     {
         parent::__construct();
         $this->service = $service;
@@ -56,6 +45,9 @@ class SetUpConsole extends Command
     public function fire()
     {
         if(! $this->proceed) {
+
+            $this->questionDefaultEnvironment();
+
             $this->questionUseMedia();
 
             $this->questionUseAccount();
@@ -64,6 +56,16 @@ class SetUpConsole extends Command
 
             $this->questionConfirmSetUp();
         }
+
+    }
+
+    protected function questionDefaultEnvironment()
+    {
+        foreach($this->service->getEnvironments() as $key => $envValue) {
+            $this->keys[$key] = $this->ask(
+                "Please enter your Environment Configuration:{$key} (default:{$envValue})", $envValue
+            );
+        }
     }
 
     /**
@@ -71,12 +73,12 @@ class SetUpConsole extends Command
      */
     protected function questionUseMedia()
     {
-        $this->socialMedia = $this->choice(
+        $this->keys['CMS_SOCIAL_DRIVER'] = $this->choice(
             'Please select your socialite account (defaults to twitter)',
             ['twitter', 'facebook', 'github'],
             0
         );
-        $this->comment('You have just selected: ' . $this->socialMedia);
+        $this->comment('You have just selected: ' . $this->keys['CMS_SOCIAL_DRIVER']);
     }
 
     /**
@@ -84,7 +86,9 @@ class SetUpConsole extends Command
      */
     protected function questionUseAccount()
     {
-        $this->useAccountName = $this->ask('Please enter your account name', 'account name');
+        $this->keys['CMS_SOCIAL_ACCOUNT'] = $this->ask(
+            'Please enter your account name', 'account name'
+        );
     }
 
     /**
@@ -92,12 +96,12 @@ class SetUpConsole extends Command
      */
     protected function questionUseStorage()
     {
-        $this->storage = $this->choice(
+        $this->keys['CMS_STORAGE_DRIVER'] = $this->choice(
             'Please select your data storage (defaults to mysql)',
-            ['mysql', 'local file storage', 'aws', 'dropbox'],
+            ['database', 'local file storage', 'file storage'],
             0
         );
-        $this->comment('You have just selected: ' . $this->storage);
+        $this->comment('You have just selected: ' . $this->keys['CMS_STORAGE_DRIVER']);
     }
 
     /**
@@ -106,19 +110,11 @@ class SetUpConsole extends Command
     protected function questionConfirmSetUp()
     {
         $this->table(
-            ['social', 'use account name', 'selected data storage'],
-            [
-                [
-                    $this->socialMedia, $this->useAccountName, $this->storage
-                    ]
-            ]
+            ['configuration', 'use environment'],
+            $this->selectedEnvironments()
         );
-        $agree = $this->choice(
-            'create initialize data? (default ok)',
-            [self::OK, self::NG],
-            0
-        );
-        if($agree === self::NG) {
+        $answer = $this->confirm('create initialize data? (default ok)', true);
+        if(!$answer) {
             $this->fire();
             return;
         }
@@ -136,10 +132,11 @@ class SetUpConsole extends Command
         $progress->setFormat('verbose');
         $progress->start();
         $i = 0;
+        $this->keys = array_merge($this->keys, $this->requiredParams());
         while ($i++ < 1) {
             $progress->setMessage('in progress...');
             $this->service->generateEnvironmentFile(
-                $this->getEnvironmentParams(), $production
+                $this->keys, $production
             );
             $progress->advance(1);
         }
@@ -159,13 +156,23 @@ class SetUpConsole extends Command
     /**
      * @return array
      */
-    protected function getEnvironmentParams()
+    protected function requiredParams()
     {
         return [
-            'CMS_SOCIAL_DRIVER' => $this->socialMedia,
-            'CMS_SOCIAL_ACCOUNT' => $this->useAccountName,
-            'CMS_STORAGE_DRIVER' => $this->storage,
             'CMS_SETUP' => 'true',
         ];
     }
+
+    /**
+     * @return array
+     */
+    private function selectedEnvironments()
+    {
+        $environments = [];
+        foreach($this->keys as $key => $value) {
+            $environments[] = [$key, $value];
+        }
+        return $environments;
+    }
+
 }

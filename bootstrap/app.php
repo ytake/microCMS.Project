@@ -23,10 +23,9 @@ $app = new MicroApp\Core\Application(
     realpath(__DIR__ . '/../')
 );
 
-
 // $app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------

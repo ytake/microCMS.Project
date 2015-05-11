@@ -1,7 +1,10 @@
 <?php
 namespace MicroApp\Providers;
 
+use Laravel\Socialite\SocialiteManager;
+use MicroApp\Authenticate\SocialiteUserProvider;
 use Laravel\Socialite\SocialiteServiceProvider as Provider;
+
 
 /**
  * for laravel socialite provider
@@ -12,5 +15,22 @@ use Laravel\Socialite\SocialiteServiceProvider as Provider;
 class SocialiteServiceProvider extends Provider
 {
 
-
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->bindShared('Laravel\Socialite\Contracts\Factory', function ($app) {
+            $app->configure('services');
+            return new SocialiteManager($app);
+        });
+        $this->app['auth']->extend('socialite', function($app) {
+            return new SocialiteUserProvider(
+                $app->make('Laravel\Socialite\Contracts\Factory'),
+                $app->make('MicroApp\Repositories\UserRepositoryInterface')
+            );
+        });
+    }
 }

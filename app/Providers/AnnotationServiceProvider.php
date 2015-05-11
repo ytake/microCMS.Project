@@ -26,7 +26,8 @@ class AnnotationServiceProvider extends ServiceProvider
      */
     protected $scanRoutes = [
         'MicroApp\Http\Controllers\Controller',
-        'MicroApp\Http\Controllers\AuthController'
+        'MicroApp\Http\Controllers\AuthController',
+        'MicroApp\Http\Controllers\Managed\IndexController'
     ];
 
     /**
